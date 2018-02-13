@@ -29,18 +29,31 @@ let blockchain = [
 // more advanced array functions, and by all means, experiment with this, but
 // get it done using just the basics first.
 
+// let getBalance = function(username) {
+//   if (username === "brian") {
+//     return blockchain[0].amount - blockchain[1].amount - blockchain[2].amount - blockchain[4].amount + blockchain[5].amount
+//   }
+//     else if (username === "ben") {
+//       return blockchain[1].amount - blockchain[3].amount + blockchain[6].amount
+//     }
+//       else if (username === "jeff") {
+//         return blockchain[2].amount + blockchain[3].amount + blockchain[4].amount - blockchain[5].amount - blockchain[6].amount
+//       }
+//   }
+
 let getBalance = function(username) {
-  if (username === "brian") {
-    return blockchain[0].amount - blockchain[1].amount - blockchain[2].amount - blockchain[4].amount + blockchain[5].amount
-  }
-    else if (username === "ben") {
-      return blockchain[1].amount - blockchain[3].amount + blockchain[6].amount
+  let runningTotal = 0;
+  for (let i = 0; i < blockchain.length; i++) {
+    let transaction = blockchain[i];
+    if (transaction.fromUser === username) {
+      runningTotal = runningTotal - transaction.amount
     }
-      else if (username === "jeff") {
-        return blockchain[2].amount + blockchain[3].amount + blockchain[4].amount - blockchain[5].amount - blockchain[6].amount
-      }
+    if (transaction.toUser === username) {
+      runningTotal = runningTotal + transaction.amount
+    }
   }
-  
+  return runningTotal;
+}
 
 // It should print out:
 // Brian's KelloggCoin balance is 8000
